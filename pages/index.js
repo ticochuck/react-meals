@@ -16,7 +16,10 @@ const fetcher = async (url) => {
 
 export default function Home() {
 
-  const { data, error } = useSWR('https://swapi.dev/api/people/', fetcher)
+  // const url = 'https://drf-snacks-api.herokuapp.com/api/v1/snacks/';
+  const url = 'http://127.0.0.1:8000/api/v1/meals/';
+
+  const { data, error } = useSWR((url), fetcher)
 
   console.log(error);
 
@@ -32,10 +35,10 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        {data.results.map((item) => {
-          return <h2 key={item.url}>hi, I am an {item.name}</h2>
+        <h1>Meals API</h1>
+        {data.map((item) => {
+          return <h2 key={item.id}>Meal name: {item.name}</h2>
         })}
-        <h1>Hello World</h1>
       </main>
     </div>
   )
